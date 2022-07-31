@@ -3,6 +3,8 @@ import { Pokemon } from 'pokenode-ts';
 import { useEffect, useState } from 'react';
 import generateRandomIds from '../utils/generateRandomId';
 
+import PokemonListing from '../components/PokemonListing';
+
 const endpoint = 'api/getPokemon?';
 
 const Home: NextPage = () => {
@@ -36,35 +38,9 @@ const Home: NextPage = () => {
 				<h1 className='text-white text-4xl font-bold'>Cutemon</h1>
 				<div className='p-4'></div>
 				<div className='card-container flex p-8 w-full justify-evenly items-center border-2 border-white rounded'>
-					<div className='pokemon-card flex flex-col items-center'>
-						<img
-							className='image w-52 h-52'
-							src={firstPokemon.sprites.front_default}
-						/>
-						<div className='p-2'></div>
-						<p className='text-base font-bold capitalize'>
-							{firstPokemon.name}
-						</p>
-						<div className='p-2'></div>
-						<button className='bg-zinc-900 p-2 px-6 rounded hover:bg-zinc-800 active:bg-zinc-700'>
-							Cuter
-						</button>
-					</div>
+					<PokemonListing pokemon={firstPokemon} />
 					<p className='text-base font-bold'>vs</p>
-					<div className='pokemon-card flex flex-col items-center'>
-						<img
-							className='image w-52 h-52'
-							src={secondPokemon.sprites.front_default}
-						/>
-						<div className='p-2'></div>
-						<p className='text-base font-bold capitalize'>
-							{secondPokemon.name}
-						</p>
-						<div className='p-2'></div>
-						<button className='bg-zinc-900 p-2 px-6 rounded hover:bg-zinc-800 active:bg-zinc-700'>
-							Cuter
-						</button>
-					</div>
+					<PokemonListing pokemon={secondPokemon} />
 				</div>
 			</div>
 		);
