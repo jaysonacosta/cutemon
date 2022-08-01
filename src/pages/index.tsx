@@ -6,6 +6,7 @@ import generateRandomIds from '../utils/generateRandomId';
 import PokemonListing from '../components/PokemonListing';
 
 import axios from 'axios';
+import Layout from '../components/Layout/component';
 
 const endpoint = 'api/getPokemon?';
 
@@ -41,11 +42,23 @@ const Home: NextPage = () => {
 		fetchData();
 	}, [ids]);
 
-	if (!isLoading && pokemon) {
+	let contents;
+
+	if (isLoading) {
+		<div className='container mx-auto px-16 flex flex-col justify-center items-center min-h-full'>
+			<h1 className='text-white text-4xl font-bold'>Cutemon</h1>
+			<div className='p-4'></div>
+			<div className='card-container flex p-8 w-full justify-evenly items-center border-2 border-white rounded'>
+				<p className='text-base font-bold'>vs</p>
+			</div>
+		</div>;
+	}
+
+	if (pokemon) {
 		const [firstPokemon, secondPokemon] = pokemon;
 
-		return (
-			<div className='container mx-auto px-16 flex flex-col justify-center items-center min-h-screen'>
+		contents = (
+			<div className='container mx-auto px-16 flex flex-col justify-center items-center min-h-full'>
 				<h1 className='text-white text-4xl font-bold'>Cutemon</h1>
 				<div className='p-4'></div>
 				<div className='card-container flex p-8 w-full justify-evenly items-center border-2 border-white rounded'>
@@ -61,22 +74,11 @@ const Home: NextPage = () => {
 						voteForCutest={voteForCutest}
 					/>
 				</div>
-				<h4 className='text-white text-xl font-bold fixed bottom-5'>
-					<a href='https://github.com/jaysonacosta/cutemon'>GitHub</a>
-				</h4>
 			</div>
 		);
 	}
 
-	return (
-		<div className='container mx-auto px-16 flex flex-col justify-center items-center min-h-screen'>
-			<h1 className='text-white text-4xl font-bold'>Cutemon</h1>
-			<div className='p-4'></div>
-			<div className='card-container flex p-8 w-full justify-evenly items-center border-2 border-white rounded'>
-				<p className='text-base font-bold'>vs</p>
-			</div>
-		</div>
-	);
+	return <Layout>{contents}</Layout>;
 };
 
 export default Home;
