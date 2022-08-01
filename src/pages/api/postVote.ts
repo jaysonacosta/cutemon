@@ -5,7 +5,6 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 	try {
 		switch (req.method) {
 			case 'POST': {
-				console.log(req.query);
 				const { mainPokemonId, opposingPokemonId } = req.query;
 				if (mainPokemonId && opposingPokemonId) {
 					const [mainId, opposingId] =

@@ -1,6 +1,6 @@
 import type { NextPage } from 'next';
 import { Pokemon } from 'pokenode-ts';
-import { useCallback, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import generateRandomIds from '../utils/generateRandomId';
 
 import PokemonListing from '../components/PokemonListing';
@@ -21,7 +21,6 @@ const Home: NextPage = () => {
 	useEffect(() => {
 		const getPokemon = async () => {
 			const [firstId, secondId] = ids;
-			console.log(firstId, secondId);
 			const firstPokemon = await axios
 				.get(endpoint + new URLSearchParams({ id: firstId.toString() }))
 				.then((res) => res.data);
@@ -62,6 +61,9 @@ const Home: NextPage = () => {
 						voteForCutest={voteForCutest}
 					/>
 				</div>
+				<h4 className='text-white text-xl font-bold fixed bottom-5'>
+					<a href='https://github.com/jaysonacosta/cutemon'>GitHub</a>
+				</h4>
 			</div>
 		);
 	}
