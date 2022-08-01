@@ -6,9 +6,15 @@ import CuterButton from '../CuterButton';
 
 interface PokemonListingProps {
 	pokemon: Pokemon;
+	opposingPokemon: Pokemon;
+	voteForCutest: () => void;
 }
 
-const PokemonListing: React.FC<PokemonListingProps> = ({ pokemon }) => {
+const PokemonListing: React.FC<PokemonListingProps> = ({
+	pokemon,
+	opposingPokemon,
+	voteForCutest,
+}) => {
 	const { name, sprites } = pokemon;
 	const { front_default } = sprites;
 
@@ -21,9 +27,12 @@ const PokemonListing: React.FC<PokemonListingProps> = ({ pokemon }) => {
 				width={200}
 			/>
 			<div className='p-2'></div>
-			<p className='text-base font-bold capitalize'>{name}</p>
+			<p className='text-xl font-bold capitalize'>{name}</p>
 			<div className='p-2'></div>
-			<CuterButton />
+			<CuterButton
+				pokemon={[pokemon, opposingPokemon]}
+				voteForCutest={voteForCutest}
+			/>
 		</div>
 	);
 };
