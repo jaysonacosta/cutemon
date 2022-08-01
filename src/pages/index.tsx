@@ -42,43 +42,43 @@ const Home: NextPage = () => {
 		fetchData();
 	}, [ids]);
 
-	let contents;
-
-	if (isLoading) {
-		<div className='container mx-auto px-16 flex flex-col justify-center items-center min-h-full'>
-			<h1 className='text-white text-4xl font-bold'>Cutemon</h1>
-			<div className='p-4'></div>
-			<div className='card-container flex p-8 w-full justify-evenly items-center border-2 border-white rounded'>
-				<p className='text-base font-bold'>vs</p>
-			</div>
-		</div>;
-	}
-
-	if (pokemon) {
+	if (!isLoading && pokemon) {
 		const [firstPokemon, secondPokemon] = pokemon;
 
-		contents = (
+		return (
+			<Layout>
+				<div className='container mx-auto px-16 flex flex-col justify-center items-center min-h-full'>
+					<h1 className='text-white text-4xl font-bold'>Cutemon</h1>
+					<div className='p-4'></div>
+					<div className='card-container flex p-8 w-full justify-evenly items-center border-2 border-white rounded'>
+						<PokemonListing
+							pokemon={firstPokemon}
+							opposingPokemon={secondPokemon}
+							voteForCutest={voteForCutest}
+						/>
+						<p className='text-base font-bold'>vs</p>
+						<PokemonListing
+							pokemon={secondPokemon}
+							opposingPokemon={firstPokemon}
+							voteForCutest={voteForCutest}
+						/>
+					</div>
+				</div>
+			</Layout>
+		);
+	}
+
+	return (
+		<Layout>
 			<div className='container mx-auto px-16 flex flex-col justify-center items-center min-h-full'>
 				<h1 className='text-white text-4xl font-bold'>Cutemon</h1>
 				<div className='p-4'></div>
 				<div className='card-container flex p-8 w-full justify-evenly items-center border-2 border-white rounded'>
-					<PokemonListing
-						pokemon={firstPokemon}
-						opposingPokemon={secondPokemon}
-						voteForCutest={voteForCutest}
-					/>
 					<p className='text-base font-bold'>vs</p>
-					<PokemonListing
-						pokemon={secondPokemon}
-						opposingPokemon={firstPokemon}
-						voteForCutest={voteForCutest}
-					/>
 				</div>
 			</div>
-		);
-	}
-
-	return <Layout>{contents}</Layout>;
+		</Layout>
+	);
 };
 
 export default Home;
